@@ -2,7 +2,7 @@
     <div nz-row  class="basketContainer">
         <div nz-col nzFlex="auto" class="gutter-row" class="basketProduct" *ngFor="let item of basketContent">
             <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
-                <nz-card-meta [nzTitle]="item.product.name" [nzDescription]="'Size: ' + item.selectedSize + ' Quantity: ' + item.quantity"></nz-card-meta>
+                <nz-card-meta [nzTitle]="item.product.name" [nzDescription]="'Size: ' + item.selectedSize + ' Quantity: ' + item.quantity + ' Unit Price: '+item.product.price+ '£'"></nz-card-meta>
                 <nz-select class="quantitySelect" [(ngModel)]="item.quantity">
                     <nz-option *ngFor="let availability of item.quantityOfSameSizeAvailable" [nzValue]="availability" [nzLabel]="availability" ></nz-option>
                 </nz-select>
@@ -23,6 +23,19 @@
                 ></nz-alert>
             </div>
             <input class="voucherInput" nz-input placeholder="Enter Voucher" [(ngModel)]="voucherCode" />
+            <div *ngIf="this.emailIsEmptyError" class="voucherError">
+                <nz-alert   
+                nzType="error"
+                nzCloseable
+                nzMessage="Email is empty"
+                nzDescription="Please enter a valid email."
+                (nzOnClose)="afterCloseEmailError()"
+                ></nz-alert>
+            </div>
+            <label nz-checkbox [(ngModel)]="marketingComms">
+               Opt-out of marketing communications
+              </label>
+            <input class="voucherInput" nz-input placeholder="Enter Your Email" [(ngModel)]="email" />
         <button nz-button nzType="primary" (click)="checkoutBasket()" [nzLoading]="this.isLoadingTwo">
             Checkout Basket
         </button>

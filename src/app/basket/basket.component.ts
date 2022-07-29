@@ -19,6 +19,10 @@ export class BasketComponent implements OnInit {
   errorArrayItemsToRemove: {name: string; quantity: number; size: string}[] = [];
   voucherCode: string = '';
   voucherNotValidError: boolean = false;
+  email: string = '';
+  emailIsEmptyError:boolean = false;
+  marketingComms: boolean = false;
+
   constructor(private notification: NzNotificationService, private requestService: RequestsService) { }
   
   async ngOnInit(): Promise<void> {
@@ -29,7 +33,7 @@ export class BasketComponent implements OnInit {
     this.isLoading =false;
     
   }
-
+  
   async getBasket() {
     const e = await this.requestService.getBasket()
     console.log(e);
@@ -52,28 +56,33 @@ export class BasketComponent implements OnInit {
     //check if users has changed a quantity on their end
     await this.checkQuantitiesHaveChanged()
     const voucherIsValid = this.voucherCode.length > 0 ? await this.checkVoucherValidity() : true;
-    if (!voucherIsValid) {
-      console.log("voucher is not valid");
-      this.voucherNotValidError = true;
+    if(this.email.length == 0) {
+      console.log('empty email');
+      this.emailIsEmptyError = true;
     } else {
-      try {
-        this.requestService.checkoutBasket(this.voucherCode).subscribe(e => {
-          if(e.arrayInError?.length == 0){ 
-            this.checkedout = true
-            this.createBasicNotification(e.totalPrice, this.voucherCode.length > 0)
-            this.getBasket()
-          } else {
-            this.errorArrayItemsToRemove = e.arrayInError
-            this.notEnoughItemsInStock = true;
-            console.log(this.errorArrayItemsToRemove, this.notEnoughItemsInStock); 
-          }
+      if (!voucherIsValid) {
+        console.log("voucher is not valid");
+        this.voucherNotValidError = true;
+      } else {
+        try {
+          this.requestService.checkoutBasket(this.voucherCode).subscribe(e => {
+            if(e.arrayInError?.length == 0){ 
+              this.checkedout = true
+              this.createBasicNotification(e.totalPrice, this.voucherCode.length > 0)
+              this.getBasket()
+            } else {
+              this.errorArrayItemsToRemove = e.arrayInError
+              this.notEnoughItemsInStock = true;
+              console.log(this.errorArrayItemsToRemove, this.notEnoughItemsInStock); 
+            }
+            this.isLoadingTwo = false;
+          })
+        } catch (error) {
+          console.log(error);
           this.isLoadingTwo = false;
-        })
-      } catch (error) {
-        console.log(error);
-        this.isLoadingTwo = false;
-        this.notEnoughItemsInStock = true;
-      }}
+          this.notEnoughItemsInStock = true;
+        }}
+      }
     }
     
     async checkVoucherValidity() {
@@ -86,7 +95,7 @@ export class BasketComponent implements OnInit {
     afterClose(){
       this.notEnoughItemsInStock = false;
     }
-
+    
     afterCloseVoucherError(){
       this.voucherNotValidError = false;
       this.isLoadingTwo=false;
@@ -117,11 +126,16 @@ export class BasketComponent implements OnInit {
       console.log("done updating quantities");
     }
 
+    afterCloseEmailError(){
+      this.isLoadingTwo=false;
+      this.emailIsEmptyError=false;
+    }
+    
     createBasicNotification(totalPrice: number, usedVoucher: boolean): void {
       const voucherText = usedVoucher ? " thanks to your voucher" : ''
       this.notification.blank(
         'Checkout Complete',
-        'Your total is '+totalPrice+"£ "+voucherText,
+        'Your total is '+totalPrice+"£"+voucherText + '.\n An email with your receipt has been sent to '+this.email+'.',
         {
           nzStyle: {
             width: '600px',
@@ -129,8 +143,8 @@ export class BasketComponent implements OnInit {
           },
           nzClass: 'test-class'
         }
-      );
+        );
+      }
+      
     }
-
-  }
-  
+    
