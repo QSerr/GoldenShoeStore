@@ -1,0 +1,16 @@
+<div class="shoeList" nz-row nz-row nzJustify="center" >
+    <div nz-col nzFlex="auto" class="gutter-row shoeBox"*ngFor="let shoe of shoes">
+        <a [routerLink]="['/product', shoe.id]">
+            <!-- <img height="50px" width="50px" [src]="'../../assets/' + shoe.img"/>
+            <div class="inner-box">{{shoe.name}}</div> -->
+
+        <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
+            <nz-card-meta [nzTitle]="shoe.name" [nzDescription]="shoe.price + '£'"></nz-card-meta>
+          </nz-card>
+          <ng-template #coverTemplate>
+            <img alt="Shoe Image" [src]="'../../assets/' + shoe.img" />
+          </ng-template>
+        </a>
+    </div>
+</div>
+

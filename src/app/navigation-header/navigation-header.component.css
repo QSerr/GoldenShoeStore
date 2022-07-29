@@ -1,0 +1,29 @@
+.container {
+    position: relative;
+}
+
+nz-divider {
+    color: #333;
+    font-weight: normal;
+  }
+
+.inner-box {
+  text-align: center;
+  padding: 8px 0;
+}
+@media (min-width: 0px) {
+    .topbar      { display: flex; }
+  }
+
+ @media (min-width: 768px) {
+    .topbar      { display: flex; }
+  }
+
+  @media (min-width: 992px) {
+    .topbar      { display: flex ; }
+  }
+
+  @media (min-width: 1200px) {
+    .topbar      { display: flex ; }
+  }
+  

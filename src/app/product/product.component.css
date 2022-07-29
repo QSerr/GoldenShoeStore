@@ -1,0 +1,61 @@
+@media (min-width: 0px) {
+    .image      { width: 80%; height: 80%; margin-left: 7%;}
+    .productInfoContainer {margin-left: 7%; margin-left: 5%;}
+}
+
+@media (min-width: 768px) {
+    .image      { height: 60%; width:  70%}
+    #leftContainer.imageContainer {
+        margin-right: 1.5%;
+        width: 50%;
+    }
+    #leftContainer {
+        float: left;
+    }
+    #rightContainer.productInfoContainer {
+        margin-left: 1.5%;
+        width: 47%;
+    }
+    .productInfoContainer {
+        width: 32%;
+    }
+    #rightContainer {
+        position: relative;
+    }
+    #rightContainer {
+        float: right;
+    }
+}
+
+@media (min-width: 992px) {
+    .image      { width: 40%; height: 40%}
+}
+
+@media (min-width: 1200px) {
+    .image      { width: 40%; height: 40%}
+}
+
+.productPage {
+    /* font-size: .9em; */
+    padding: 10px 3% 10px 3%;
+    overflow: hidden;
+    min-height: 200px;
+    margin: 0 auto;
+}
+
+.spin {
+    margin-top: 50%;
+}
+
+.sizeSelect {
+    margin-right: 10px;
+    width: 150px;
+}
+
+.mainContainer{
+    margin-top: 20px;
+}
+
+.errorMessage {
+    margin: 10px 10px 10px 10px;
+}

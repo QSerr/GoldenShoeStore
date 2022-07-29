@@ -1,0 +1,40 @@
+  <ul class="topbar" nz-row nzJustify="center" nz-menu nzMode="horizontal">
+    <li nz-col  nzFlex="auto"
+    class="gutter-row"  nz-menu-item nzMatchRouter>
+        <a id="womens-link" [routerLink]="['/womens']">
+          <div class="inner-box">Women's</div>
+        </a>
+    </li>
+
+    <li nz-col nzFlex="auto"
+    class="gutter-row"   nz-menu-item nzMatchRouter>
+        <a id="mens-link"  [routerLink]="['/mens']">
+          <div class="inner-box">Men's</div>
+        </a>
+    </li>
+
+    <li nz-col nzFlex="auto"
+    class="gutter-row" nz-menu-item nzMatchRouter>
+        <a id="kids-link" [routerLink]="['/kids']">
+          <div class="inner-box">Kid's</div>
+        </a>
+    </li>
+
+    <li nz-col nzFlex="auto"
+    class="gutter-row"  nz-menu-item nzMatchRouter>
+        <a id="accessories-link" [routerLink]="['/accessories']">
+          <div class="inner-box">Accessories</div>
+        </a>
+    </li>
+
+    <li nz-col
+    class="gutter-row"  nz-menu-item nzMatchRouter>
+    <a id="basket-link" [routerLink]="['/basket']">      
+    <img  ng-image width="75px" height="75px" class="inner-box" 
+                src="../../assets/basket.jpg" alt="Basket" />
+      </a>
+    </li>
+
+  </ul>
+  
+

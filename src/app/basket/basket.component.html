@@ -1,0 +1,45 @@
+<div *ngIf="this.isLoading == false" class="mainContainer">
+    <div nz-row  class="basketContainer">
+        <div nz-col nzFlex="auto" class="gutter-row" class="basketProduct" *ngFor="let item of basketContent">
+            <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate">
+                <nz-card-meta [nzTitle]="item.product.name" [nzDescription]="'Size: ' + item.selectedSize + ' Quantity: ' + item.quantity"></nz-card-meta>
+                <nz-select class="quantitySelect" [(ngModel)]="item.quantity">
+                    <nz-option *ngFor="let availability of item.quantityOfSameSizeAvailable" [nzValue]="availability" [nzLabel]="availability" ></nz-option>
+                </nz-select>
+            </nz-card>
+            <ng-template #coverTemplate>
+                <img [routerLink]="['/product', item.product.id]" class="thumbnail" alt="shoe image" [src]="'../../assets/' + item.product.img" />
+            </ng-template>
+        </div>
+    </div>
+    <div *ngIf="this.basketContent.length !== 0" class="checkoutContainer">
+            <div *ngIf="this.voucherNotValidError" class="voucherError">
+                <nz-alert   
+                nzType="error"
+                nzCloseable
+                nzMessage="Voucher is invalid"
+                nzDescription="Sorry but this voucher is invalid."
+                (nzOnClose)="afterCloseVoucherError()"
+                ></nz-alert>
+            </div>
+            <input class="voucherInput" nz-input placeholder="Enter Voucher" [(ngModel)]="voucherCode" />
+        <button nz-button nzType="primary" (click)="checkoutBasket()" [nzLoading]="this.isLoadingTwo">
+            Checkout Basket
+        </button>
+    </div>
+    
+    <div *ngIf="this.basketContent.length == 0" class="noBasketContent">
+        <h2>Your basket is empty, start shopping by selecting a category from the navigation!</h2>
+    </div>
+    <div *ngIf="this.notEnoughItemsInStock" class="noBasketContent">
+        <nz-alert   
+        nzType="error"
+        nzCloseable
+        nzMessage="Not enough items in stock"
+        [nzDescription]="'Sorry but we do not have enough of these items in stock, please remove these items from your cart : ' + printRemoveArray()"
+        (nzOnClose)="afterClose()"
+        ></nz-alert>
+    </div>
+    
+</div>
+<nz-spin *ngIf="this.isLoading" class="spin"></nz-spin>

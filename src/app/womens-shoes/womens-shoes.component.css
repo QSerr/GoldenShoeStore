@@ -1,0 +1,46 @@
+@media (min-width: 1025px){
+#containerHeader {
+  padding: 0 0 0 13.5% !important;
+}}
+  @media only screen and (min-width: 861px){
+#containerHeader {
+  padding: 0 0 0 10% !important;
+}}
+  @media only screen and (min-width: 768px){
+#containerHeader {
+  padding: 0 0 0 5% !important;
+}}
+  @media (min-width: 860px){
+#containerHeader {
+  padding: 0 25%;
+  border-bottom: none;
+}}
+
+
+.container {
+  position: relative;
+}
+
+nz-divider {
+  color: #333;
+  font-weight: normal;
+}
+
+.inner-box {
+text-align: center;
+padding: 8px 0;
+}
+
+.containerHeader{
+  background-color: goldenrod;
+}
+
+.pageTitle {
+  padding-left: 25px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.categoryLabel{
+  margin: 0px 10px 10px 10px;
+}

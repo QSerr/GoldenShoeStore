@@ -1,0 +1,39 @@
+<div class="productPage" *ngIf="!this.isLoading">
+    <div class="mainContainer">
+        <!-- <div class="productTitle">
+            <h1 class="productName">{{this.activeProduct?.name}}</h1>
+        </div> -->
+        <div id="leftContainer" class="imageContainer">
+            <img class="image"  [src]="'../../assets/' + this.activeProduct?.img"/>
+        </div>
+        <div id="rightContainer" class="productInfoContainer">
+            <div id="productName" class="name tabRight">
+                <h1 class="productName">{{this.activeProduct?.name}}</h1>
+            </div>
+            <div id="productDescription" class="name tabRight">
+                <h2 class="productDescription">{{this.activeProduct?.description}}</h2>
+            </div>
+            <div id="productPrice" class="name tabRight">
+                <h2 class="productPrice">{{this.activeProduct?.price}}£</h2>
+            </div>
+            <div id="addToBasketContainer" class="button tabRight">
+                <nz-select class="sizeSelect" [(ngModel)]="this.selectedSize">
+                    <nz-option nzValue="Please select a size." nzLabel="Please select a size."></nz-option>
+                    <nz-option *ngFor="let size of this.activeProduct?.availableSizes" [nzValue]="size.size" [nzLabel]="size.size"></nz-option>
+                </nz-select>
+                <button nz-button nzType="primary" (click)="addProductToBasket()" [nzLoading]="this.isLoadingTwo" [disabled]="hasPickedASize()">
+                    + Add To Basket
+                </button>
+                <nz-alert *ngIf="this.tooManyitemsAlert"
+                nzType="error"
+                class="errorMessage"
+                nzCloseable
+                nzMessage="Too many items added"
+                nzDescription="There are no more shoes of that size in stock"
+                (nzOnClose)="afterClose()"
+                ></nz-alert>
+            </div>
+        </div>
+    </div>
+</div>
+<nz-spin *ngIf="this.isLoading" class="spin"></nz-spin>

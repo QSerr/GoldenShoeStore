@@ -1,0 +1,17 @@
+<div id="mainContainer">
+    <div class="containerHeader">
+        <div class="pageTitle">
+            <h1>Women's shoes</h1>
+        </div>
+        <div class="radioContainer" >
+            <nz-radio-group [(ngModel)]="radioValue" nzButtonStyle="solid">
+            <label class="categoryLabel" nz-radio-button nzValue="trainers">Women's trainers</label>
+            <label class="categoryLabel" nz-radio-button nzValue="boots">Women's Boots</label>
+            <label class="categoryLabel" nz-radio-button nzValue="special">Golden Shoe Special</label>
+          </nz-radio-group>
+        </div>
+    </div>
+
+    <app-shoe-list [criteria]="['womens',radioValue]"></app-shoe-list>
+
+</div>
